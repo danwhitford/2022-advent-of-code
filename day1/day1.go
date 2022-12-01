@@ -7,13 +7,12 @@ import (
 	"sort"
 	"strconv"
 
+	"github.com/danwhitford/2022adventofcode/utils"
 )
 
 func solveDay1(fname string) int {
 	f, err := os.Open(fname)
-	if err != nil {
-		panic(err)
-	}
+	utils.TestErr(err)
 	scanner := bufio.NewScanner(f)
 	
 	var buf int
@@ -26,9 +25,8 @@ func solveDay1(fname string) int {
 			continue
 		}
 		lineD, err := strconv.Atoi(line)
-		if err != nil {
-			panic(err)
-		}
+		utils.TestErr(err)
+
 		buf += lineD
 	}
 	elves = append(elves, buf)
