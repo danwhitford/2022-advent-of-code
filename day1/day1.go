@@ -1,9 +1,7 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"sort"
 	"strconv"
 
@@ -11,25 +9,34 @@ import (
 )
 
 func solveDay1(fname string) int {
-	f, err := os.Open(fname)
-	utils.TestErr(err)
-	scanner := bufio.NewScanner(f)
-	
-	var buf int
-	elves := make([]int, 0)
-	for scanner.Scan() {
-		line := scanner.Text()
-		if line == "" {
-			elves = append(elves, buf)
-			buf = 0
-			continue
-		}
-		lineD, err := strconv.Atoi(line)
-		utils.TestErr(err)
+	intLines := utils.Map(
+		utils.Lines(fname),
+		func(s string) int {
+			if s == "" {
+				return -1
+			}
+			d, err := strconv.Atoi(s)
+			utils.TestErr(err)
+			return d
+		})
 
-		buf += lineD
-	}
-	elves = append(elves, buf)
+	totals := utils.Split(
+		intLines,
+		func(t int) bool {
+			return t == -1
+		},
+	)
+
+	elves := utils.Map(
+		totals,
+		func(t []int) int {
+			total := 0
+			for _, v := range t {
+				total += v
+			}
+			return total
+		},
+	)
 
 	sort.Ints(elves)
 	var highest = 0
