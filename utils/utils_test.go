@@ -51,7 +51,7 @@ func TestSetsIntersection(t *testing.T) {
 				SetFromList([]rune("abCd")),
 				SetFromList([]rune("Cxyz")),
 			},
-			SetFromList[rune]([]rune("C")),
+			SetFromList([]rune("C")),
 		},
 	}
 
