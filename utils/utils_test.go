@@ -1,8 +1,8 @@
 package utils
 
 import (
-	"encoding/json"
 	"testing"
+
 )
 
 func TestFoldN(t *testing.T) {
@@ -20,8 +20,23 @@ func TestFoldN(t *testing.T) {
 
 	for _, test := range table {
 		actual := FoldN(test.in, test.n)
-		expectedJson, _ := json.Marshal(test.expected)
-		actualJson, _ := json.Marshal(actual)
-		Assert(t, string(expectedJson), string(actualJson), test)
+		Assert(t, test.expected, actual, test)
+	}
+}
+
+func TestUniq(t *testing.T) {
+	table := []struct{
+		in []rune
+		expected []rune
+	}{
+		{
+			[]rune("vJrwpWtwJgWrhcsFMMfFFhFp"),
+			[]rune("vJrwpWtghcsFMf"),
+		},
+	}
+
+	for _, test := range table {
+		actual := Uniq(test.in)
+		Assert(t, test.expected, actual, test)
 	}
 }

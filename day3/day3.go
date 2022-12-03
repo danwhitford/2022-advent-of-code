@@ -9,17 +9,9 @@ import (
 func getMisplaced(rucksacks []string) string {
 	found := make(map[rune]int, 0)
 	for _, sack := range rucksacks {
-		sackset := make(map[rune]int, 0)
-		for _, r := range sack {
-			sackset[r] = 1
-		}
-		for k := range sackset {
-			_, prs := found[k]
-			if prs {
-				found[k]++
-			} else {
-				found[k] = 1
-			}
+		u := utils.Uniq([]rune(sack))
+		for _, v := range u {
+			found[v]++
 		}
 	}
 	

@@ -5,6 +5,8 @@ import (
 	"log"
 	"os"
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
 )
 
 func TestErr(err error) {
@@ -23,11 +25,11 @@ func Lines(fname string) []string {
 		line := scanner.Text()
 		elves = append(elves, line)
 	}
-	
+
 	return elves
 }
 
-func Split[T any] (slice[]T, split func(t T) bool) [][]T {
+func Split[T any](slice []T, split func(t T) bool) [][]T {
 	elves := make([][]T, 0)
 	buf := make([]T, 0)
 	for _, v := range slice {
@@ -42,7 +44,7 @@ func Split[T any] (slice[]T, split func(t T) bool) [][]T {
 	return elves
 }
 
-func Map[T, U any] (slice []T, f func(t T) U) []U {
+func Map[T, U any](slice []T, f func(t T) U) []U {
 	out := make([]U, 0)
 	for _, t := range slice {
 		u := f(t)
@@ -51,9 +53,9 @@ func Map[T, U any] (slice []T, f func(t T) U) []U {
 	return out
 }
 
-func Assert[T comparable, U any] (t *testing.T, expected, actual T, input U) {
-	if actual != expected {
-		t.Fatalf("wanted %v but got %v for %v", expected, actual, input)
+func Assert[U any](t *testing.T, expected, actual interface{}, input U) {
+	if diff := cmp.Diff(expected, actual); diff != "" {
+		t.Fatalf("failed: %v\n(-want +got):\n%s", input, diff)
 	}
 }
 
@@ -75,4 +77,17 @@ func FoldN[T any](slice []T, n int) [][]T {
 	}
 
 	return ret
+}
+
+func Uniq[T comparable](slice []T) []T {
+	m := make(map[T]bool, 0)
+	r := make([]T, 0)
+	for _, el := range slice {
+		_, prs := m[el]
+		if !prs {
+			m[el] = true
+			r = append(r, el)
+		}
+	}
+	return r
 }
