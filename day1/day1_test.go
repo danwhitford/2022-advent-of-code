@@ -1,10 +1,12 @@
 package main
 
-import "testing"
+import (
+	"testing"
+
+	"github.com/danwhitford/2022adventofcode/utils"
+)
 
 func TestSolve1(t *testing.T) {
 	answer := solveDay1("testday1.txt")
-	if answer != 45000 {
-		t.Fatalf("wanted 45000 but got %d", answer)
-	}
+	utils.Assert(t, 45000, answer, "test day 1")
 }
