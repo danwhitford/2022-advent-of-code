@@ -56,3 +56,22 @@ func Assert[T comparable, U any] (t *testing.T, expected, actual T, input U) {
 		t.Fatalf("wanted %v but got %v for %v", expected, actual, input)
 	}
 }
+
+func FoldN[T any](slice []T, n int) [][]T {
+	ret := make([][]T, 0)
+	buf := make([]T, 0)
+	tick := 0
+	for _, el := range slice {
+		buf = append(buf, el)
+		if tick == 3 {
+			ret = append(ret, buf)
+			tick = 0
+			buf = make([]T, 0)
+		}
+	}
+	if len(buf) > 0 {
+		ret = append(ret, buf)
+	}
+
+	return ret
+}
