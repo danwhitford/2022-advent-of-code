@@ -78,16 +78,3 @@ func FoldN[T any](slice []T, n int) [][]T {
 
 	return ret
 }
-
-func Uniq[T comparable](slice []T) []T {
-	m := make(map[T]bool, 0)
-	r := make([]T, 0)
-	for _, el := range slice {
-		_, prs := m[el]
-		if !prs {
-			m[el] = true
-			r = append(r, el)
-		}
-	}
-	return r
-}

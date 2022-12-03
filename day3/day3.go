@@ -7,18 +7,14 @@ import (
 )
 
 func getMisplaced(rucksacks []string) string {
-	found := make(map[rune]int, 0)
+	rucksacksets := make([]utils.Set[rune], 0)
 	for _, sack := range rucksacks {
-		u := utils.Uniq([]rune(sack))
-		for _, v := range u {
-			found[v]++
-		}
+		rucksacksets = append(rucksacksets, utils.SetFromList([]rune(sack)))
 	}
-	
-	for k, v := range found {
-		if v == len(rucksacks) {
-			return string(k)
-		}
+
+	intersect := utils.SetsIntersection(rucksacksets)
+	if !intersect.Empty() {
+		return string(intersect.Arr[0])
 	}
 
 	panic("not found")
@@ -27,9 +23,9 @@ func getMisplaced(rucksacks []string) string {
 func getPriority(s string) int {
 	b := s[0]
 	if 'a' <= b && b <= 'z' {
-		return int(b % 'a') + 1
+		return int(b%'a') + 1
 	} else {
-		return int(b % 'A') + 27
+		return int(b%'A') + 27
 	}
 }
 
