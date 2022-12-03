@@ -6,18 +6,26 @@ import (
 	"github.com/danwhitford/2022adventofcode/utils"
 )
 
-func getMisplaced(items string) string {
-	l := len(items)
-	a := items[l/2:]
-	b := items[:l/2]
+func getMisplaced(rucksacks []string) string {
 	found := make(map[rune]int, 0)
-	for _, r := range a {
-		found[r] = 1
+	for _, sack := range rucksacks {
+		sackset := make(map[rune]int, 0)
+		for _, r := range sack {
+			sackset[r] = 1
+		}
+		for k := range sackset {
+			_, prs := found[k]
+			if prs {
+				found[k]++
+			} else {
+				found[k] = 1
+			}
+		}
 	}
-	for _, r := range b {
-		_, prs := found[r]
-		if prs {
-			return string(r)
+	
+	for k, v := range found {
+		if v == len(rucksacks) {
+			return string(k)
 		}
 	}
 
@@ -35,9 +43,11 @@ func getPriority(s string) int {
 
 func solveDay3(fname string) int {
 	lines := utils.Lines(fname)
+	folded := utils.FoldN(lines, 3)
 	total := 0
-	for _, line := range lines {
+	for _, line := range folded {
 		missing := getMisplaced(line)
+		fmt.Printf("missing was %s\n", missing)
 		priority := getPriority(missing)
 		total += priority
 	}

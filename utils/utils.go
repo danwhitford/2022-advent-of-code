@@ -63,6 +63,7 @@ func FoldN[T any](slice []T, n int) [][]T {
 	tick := 0
 	for _, el := range slice {
 		buf = append(buf, el)
+		tick++
 		if tick == 3 {
 			ret = append(ret, buf)
 			tick = 0
