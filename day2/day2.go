@@ -23,14 +23,14 @@ var scoreFer = map[move]int{
 
 func getMove(s string) move {
 	switch s {
-	case "A":
+	case "A", "X":
 		return Rock
-	case "B":
+	case "B", "Y":
 		return Paper
-	case "C":
+	case "C", "Z":
 		return Scissors
 	default:
-		panic("not found")
+		panic("not found" + s)
 	}
 }
 
@@ -80,7 +80,31 @@ func getScore(a, b string) int {
 	return outcome
 }
 
-func solveDay2(fname string) int {
+func solvePart1(fname string) int {
+	lines := utils.Lines(fname)
+	turns := utils.Map(
+		lines,
+		func(s string) []string {
+			return strings.Split(s, " ")
+		},
+	)
+	total := 0
+	for _, turn := range turns {
+		theirs := getMove(turn[0])
+		ours := getMove(turn[1])
+		total += scoreFer[ours]
+		if theirs == ours {
+			total += (3)
+		} else if (ours == Rock && theirs == Scissors) ||
+			(ours == Scissors && theirs == Paper) ||
+			(ours == Paper && theirs == Rock) {
+				total += 6
+		}
+	}
+	return total
+}
+
+func solvePart2(fname string) int {
 	lines := utils.Lines(fname)
 	turns := utils.Map(
 		lines,
@@ -98,6 +122,6 @@ func solveDay2(fname string) int {
 }
 
 func main() {
-	a := solveDay2("day2/day2.txt")
-	fmt.Println(a)
+	fmt.Println(solvePart1("day2/day2.txt"))
+	fmt.Println(solvePart2("day2/day2.txt"))
 }

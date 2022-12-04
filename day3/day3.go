@@ -29,7 +29,19 @@ func getPriority(s string) int {
 	}
 }
 
-func solveDay3(fname string) int {
+func solvePart1(fname string) int {
+	lines := utils.Lines(fname)
+	total := 0
+	for _, line := range lines {
+		firstHalf := utils.SetFromList([]rune(line)[len(line)/2:])
+		secondHalf := utils.SetFromList([]rune(line)[:len(line)/2])
+		intersection := firstHalf.Intersect(secondHalf)
+		total += getPriority(string(intersection.GetOne()))
+	}
+	return total
+}
+
+func solvePart2(fname string) int {
 	lines := utils.Lines(fname)
 	folded := utils.FoldN(lines, 3)
 	total := 0
@@ -43,5 +55,6 @@ func solveDay3(fname string) int {
 }
 
 func main() {
-	fmt.Println(solveDay3("day3/day3.txt"))
+	fmt.Println(solvePart1("day3/day3.txt"))
+	fmt.Println(solvePart2("day3/day3.txt"))
 }

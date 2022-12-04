@@ -103,3 +103,13 @@ func TestOverlap(t *testing.T) {
 		utils.Assert(t, test.expected, actual, test)
 	}
 }
+
+func TestSolvePart1(t *testing.T) {
+	actual := solvePart1("testday4.txt")
+	utils.Assert(t, 2, actual, "testday4")
+}
+
+func TestSolvePart2(t *testing.T) {
+	actual := solvePart2("testday4.txt")
+	utils.Assert(t, 4, actual, "testday4")
+}

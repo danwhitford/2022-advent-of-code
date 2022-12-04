@@ -56,7 +56,12 @@ func TestGetPriority(t *testing.T) {
 	}
 }
 
-func TestSolveDay3(t *testing.T) {
-	actual := solveDay3("testday3.txt")
+func TestSolvePart1(t *testing.T) {
+	actual := solvePart1("testday3.txt")
+	utils.Assert(t, 157, actual, "testday3")
+}
+
+func TestSolvePart2(t *testing.T) {
+	actual := solvePart2("testday3.txt")
 	utils.Assert(t, 70, actual, "testday3")
 }

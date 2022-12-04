@@ -23,7 +23,12 @@ func TestGetScore(t *testing.T) {
 	}
 }
 
-func TestSolveDay2(t *testing.T) {
-	e := solveDay2("testday2.txt")
+func TestSolvePart1(t *testing.T) {
+	e := solvePart1("testday2.txt")
+	utils.Assert(t, 15, e, "testsolveday2")
+}
+
+func TestSolvePart2(t *testing.T) {
+	e := solvePart2("testday2.txt")
 	utils.Assert(t, 12, e, "testsolveday2")
 }
