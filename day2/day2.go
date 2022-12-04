@@ -98,7 +98,7 @@ func solvePart1(fname string) int {
 		} else if (ours == Rock && theirs == Scissors) ||
 			(ours == Scissors && theirs == Paper) ||
 			(ours == Paper && theirs == Rock) {
-				total += 6
+			total += 6
 		}
 	}
 	return total

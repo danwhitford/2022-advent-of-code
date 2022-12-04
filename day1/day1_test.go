@@ -14,4 +14,3 @@ func TestSolvePart2(t *testing.T) {
 	answer := solvePart2("testday1.txt")
 	utils.Assert(t, 45000, answer, "test day 1")
 }
-
