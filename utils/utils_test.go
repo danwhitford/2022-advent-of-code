@@ -36,7 +36,7 @@ func TestSetFromList(t *testing.T) {
 
 	for _, test := range table {
 		actual := SetFromList(test.in)
-		Assert(t, len(test.expected), len(actual.Arr), test)
+		Assert(t, len(test.expected), actual.Len(), test)
 	}
 }
 

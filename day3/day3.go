@@ -14,7 +14,7 @@ func getMisplaced(rucksacks []string) string {
 
 	intersect := utils.SetsIntersection(rucksacksets)
 	if !intersect.Empty() {
-		return string(intersect.Arr[0])
+		return string(intersect.GetOne())
 	}
 
 	panic("not found")
