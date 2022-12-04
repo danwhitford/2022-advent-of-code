@@ -86,6 +86,16 @@ func TestOverlap(t *testing.T) {
 			assignment{4, 8},
 			true,
 		},
+		{
+			assignment{1, 6},
+			assignment{6, 10},
+			true,
+		},
+		{
+			assignment{6, 10},
+			assignment{1, 6},
+			true,
+		},
 	}
 
 	for _, test := range table {
