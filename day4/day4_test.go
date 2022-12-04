@@ -6,10 +6,10 @@ import (
 	"github.com/danwhitford/2022adventofcode/utils"
 )
 
-func TestContains(t *testing.T){
-	table := []struct{
-		a assignment
-		b assignment
+func TestContains(t *testing.T) {
+	table := []struct {
+		a        assignment
+		b        assignment
 		expected bool
 	}{
 		{
@@ -50,10 +50,10 @@ func TestContains(t *testing.T){
 	}
 }
 
-func TestOverlap(t *testing.T){
-	table := []struct{
-		a assignment
-		b assignment
+func TestOverlap(t *testing.T) {
+	table := []struct {
+		a        assignment
+		b        assignment
 		expected bool
 	}{
 		{
