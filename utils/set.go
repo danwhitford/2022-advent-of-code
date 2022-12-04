@@ -6,12 +6,8 @@ type Set[T comparable] struct {
 
 func SetFromList[T comparable](li []T) Set[T] {
 	s := make(map[T]struct{}, 0)
-	found := make(map[T]bool, 0)
 	for _, el := range li {
-		found[el] = true
-	}
-	for k := range found {
-		s[k] = struct{}{}
+		s[el] = struct{}{}
 	}
 	return Set[T]{s}
 }
