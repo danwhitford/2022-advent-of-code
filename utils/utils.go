@@ -53,6 +53,16 @@ func Map[T, U any](slice []T, f func(t T) U) []U {
 	return out
 }
 
+func Filter[T any](slice []T, f func(t T) bool) []T {
+	out := make([]T, 0)
+	for _, t := range slice {
+		if f(t) {
+			out = append(out, t)
+		}
+	}
+	return out
+}
+
 func Assert[U any](t *testing.T, expected, actual interface{}, input U) {
 	if diff := cmp.Diff(expected, actual); diff != "" {
 		t.Fatalf("failed: %v\n(-want +got):\n%s", input, diff)
