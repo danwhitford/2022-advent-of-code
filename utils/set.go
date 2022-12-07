@@ -4,6 +4,10 @@ type Set[T comparable] struct {
 	Arr map[T]struct{}
 }
 
+func EmptySet[T comparable]() Set[T] {
+	return SetFromList(make([]T, 0))
+}
+
 func SetFromList[T comparable](li []T) Set[T] {
 	s := make(map[T]struct{}, 0)
 	for _, el := range li {
@@ -12,14 +16,14 @@ func SetFromList[T comparable](li []T) Set[T] {
 	return Set[T]{s}
 }
 
-func (s Set[T]) Intersect(other Set[T]) Set[T] {
+func (set *Set[T]) Intersect(other Set[T]) Set[T] {
 	o := SetFromList([]T{})
 	var smaller, bigger Set[T]
-	if s.Len() > other.Len() {
+	if set.Len() > other.Len() {
 		smaller = other
-		bigger = s
+		bigger = *set
 	} else {
-		smaller = s
+		smaller = *set
 		bigger = other
 	}
 
@@ -33,15 +37,15 @@ func (s Set[T]) Intersect(other Set[T]) Set[T] {
 	return o
 }
 
-func (s Set[T]) GetOne() T {
-	for k := range s.Arr {
+func (set *Set[T]) GetOne() T {
+	for k := range set.Arr {
 		return k
 	}
 	panic("empty set can't get")
 }
 
-func (s Set[T]) Len() int {
-	return len(s.Arr)
+func (set *Set[T]) Len() int {
+	return len(set.Arr)
 }
 
 func SetsIntersection[T comparable](sets []Set[T]) Set[T] {
@@ -52,6 +56,15 @@ func SetsIntersection[T comparable](sets []Set[T]) Set[T] {
 	return ret
 }
 
-func (set Set[T]) Empty() bool {
+func (set *Set[T]) Empty() bool {
 	return len(set.Arr) == 0
+}
+
+func (set *Set[T]) Add(t T) {
+	set.Arr[t] = struct{}{}
+}
+
+func (set *Set[T]) Contains(t T) bool {
+	_, prs := set.Arr[t]
+	return prs
 }
