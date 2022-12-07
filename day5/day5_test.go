@@ -24,7 +24,7 @@ func TestSolvePart2(t *testing.T) {
 		{'M', 'C', 'D'},
 		{'P'},
 	}
-	
+
 	actual := solvePart2("day5test.txt", testStacks)
 	utils.Assert(t, "MCD", actual, "testday5part2")
 }

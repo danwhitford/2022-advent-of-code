@@ -80,7 +80,6 @@ func getDirs(root *directory, out *[]*directory) {
 func solveDay1(i []string) int {
 	root := parseInput(i)
 	out := make([]*directory, 0)
-	out = append(out, root)
 	getDirs(root, &out)
 	total := 0
 	for _, i := range out {
@@ -102,7 +101,6 @@ func solveDay2(i []string) int {
 	smallestEligible := math.MaxInt
 
 	out := make([]*directory, 0)
-	out = append(out, root)
 	getDirs(root, &out)
 	for _, i := range out {
 		size := i.getSize()
