@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/danwhitford/2022adventofcode/utils"
+	"math"
 	"strconv"
 	"strings"
 )
@@ -91,7 +92,29 @@ func solveDay1(i []string) int {
 	return total
 }
 
+func solveDay2(i []string) int {
+	root := parseInput(i)
+	rootSize := root.getSize()
+	available := 70000000
+	neededFree := 30000000
+	unUsedSpace := available - rootSize
+	needToDelete := neededFree - unUsedSpace
+	smallestEligible := math.MaxInt
+
+	out := make([]*directory, 0)
+	out = append(out, root)
+	getDirs(root, &out)
+	for _, i := range out {
+		size := i.getSize()
+		if size >= needToDelete && size < smallestEligible {
+			smallestEligible = size
+		}
+	}
+	return smallestEligible
+}
+
 func main() {
 	lines := utils.Lines("day7/day7.txt")
 	fmt.Println(solveDay1(lines))
+	fmt.Println(solveDay2(lines))
 }

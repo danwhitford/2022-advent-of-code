@@ -34,3 +34,8 @@ func TestSolveDay1(t *testing.T) {
 	actual := solveDay1(strings.Split(input, "\n"))
 	utils.Assert(t, 95437, actual, "testpart1")
 }
+
+func TestSolveDay2(t *testing.T) {
+	actual := solveDay2(strings.Split(input, "\n"))
+	utils.Assert(t, 24933642, actual, "testpart1")
+}
