@@ -3,8 +3,6 @@ package main
 import (
 	"fmt"
 	"github.com/danwhitford/2022adventofcode/utils"
-	"github.com/danwhitford/stacko/stack"
-	path2 "path"
 	"strconv"
 	"strings"
 )
@@ -15,54 +13,50 @@ type file struct {
 }
 
 type directory struct {
-	directories []string
+	name        string
+	directories map[string]*directory
 	files       []file
-	parent      string
+	parent      *directory
 }
 
-func (d directory) getSize(m map[string]directory) int {
+func (d directory) getSize() int {
 	total := 0
-	ds := stack.Stack[directory]{}
-	ds.Push(d)
-	for !ds.Empty() {
-		top, err := ds.Pop()
-		if err != nil {
-			panic(err)
-		}
-		for _, f := range top.files {
-			total += f.size
-		}
-		for _, dd := range top.directories {
-			ds.Push(m[dd])
-		}
-		//total += ddd.getSize(m)
+	for _, f := range d.files {
+		total += f.size
+	}
+	for _, dd := range d.directories {
+		total += dd.getSize()
 	}
 	return total
 }
 
-func parseInput(input []string) map[string]directory {
-	dirs := make(map[string]directory)
-	cwd := ""
-	var cdir directory
+func parseInput(input []string) *directory {
+	root := &directory{
+		name:        "/",
+		directories: make(map[string]*directory, 0),
+		files:       make([]file, 0),
+		parent:      nil,
+	}
+	cdir := root
 	for _, line := range input {
 		tokens := strings.Fields(line)
 		if strings.HasPrefix(line, "$") {
 			if tokens[1] == "cd" {
-				path := path2.Join(cdir.parent, cwd)
-				dirs[path] = cdir
-
-				if tokens[2] == ".." {
-					cwd = cdir.parent
-					cdir = dirs[cwd]
+				if tokens[2] == "/" {
+					continue
+				} else if tokens[2] == ".." {
+					cdir = cdir.parent
 				} else {
-					//parent := cwd
-					cwd = tokens[2]
-					cdir = directory{parent: path}
+					cdir = cdir.directories[tokens[2]]
 				}
 			}
 		} else if strings.HasPrefix(line, "dir") {
-			dirpath := path2.Join(cdir.parent, cwd, tokens[1])
-			cdir.directories = append(cdir.directories, dirpath)
+			cdir.directories[tokens[1]] = &directory{
+				name:        tokens[1],
+				directories: make(map[string]*directory, 0),
+				files:       make([]file, 0),
+				parent:      cdir,
+			}
 		} else {
 			size, err := strconv.Atoi(tokens[0])
 			if err != nil {
@@ -72,20 +66,26 @@ func parseInput(input []string) map[string]directory {
 			cdir.files = append(cdir.files, f)
 		}
 	}
-	path := path2.Join(cdir.parent, cwd)
-	dirs[path] = cdir
-	return dirs
+	return root
+}
+
+func getDirs(root *directory, out *[]*directory) {
+	for _, d := range root.directories {
+		*out = append(*out, d)
+		getDirs(d, out)
+	}
 }
 
 func solveDay1(i []string) int {
-	tree := parseInput(i)
+	root := parseInput(i)
+	out := make([]*directory, 0)
+	out = append(out, root)
+	getDirs(root, &out)
 	total := 0
-	for k := range tree {
-		fmt.Printf("%s\t%+v\t%d\n", k, tree[k], tree[k].getSize(tree))
-
-		d := tree[k]
-		if d.getSize(tree) <= 100000 {
-			total += d.getSize(tree)
+	for _, i := range out {
+		size := i.getSize()
+		if size <= 100_000 {
+			total += size
 		}
 	}
 	return total
