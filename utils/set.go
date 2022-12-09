@@ -37,6 +37,17 @@ func (set *Set[T]) Intersect(other Set[T]) Set[T] {
 	return o
 }
 
+func (set *Set[T]) Union(other Set[T]) Set[T] {
+	o := EmptySet[T]()
+	for k := range set.Arr {
+		o.Add(k)
+	}
+	for k := range other.Arr {
+		o.Add(k)
+	}
+	return o
+}
+
 func (set *Set[T]) GetOne() T {
 	for k := range set.Arr {
 		return k
