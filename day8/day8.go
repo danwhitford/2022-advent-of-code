@@ -116,7 +116,7 @@ func solvePart2(in []string) int {
 			leftScore := 0
 			for {
 				otherTree := GetAt(grid, xx, yy, size)
-				if otherTree == 0 {
+				if otherTree == -1 {
 					break
 				}
 				leftScore++
@@ -131,7 +131,7 @@ func solvePart2(in []string) int {
 			downScore := 0
 			for {
 				otherTree := GetAt(grid, xx, yy, size)
-				if otherTree == 0 {
+				if otherTree == -1 {
 					break
 				}
 				downScore++
@@ -146,7 +146,7 @@ func solvePart2(in []string) int {
 			rightScore := 0
 			for {
 				otherTree := GetAt(grid, xx, yy, size)
-				if otherTree == 0 {
+				if otherTree == -1 {
 					break
 				}
 				rightScore++
@@ -161,7 +161,7 @@ func solvePart2(in []string) int {
 			upScore := 0
 			for {
 				otherTree := GetAt(grid, xx, yy, size)
-				if otherTree == 0 {
+				if otherTree == -1 {
 					break
 				}
 				upScore++
@@ -172,7 +172,7 @@ func solvePart2(in []string) int {
 			}
 
 			score := upScore * downScore * leftScore * rightScore
-			fmt.Printf("{%d, %d} %d (%d, %d, %d, %d)\n", x, y, score, upScore, downScore, leftScore, rightScore)
+			//fmt.Printf("{%d, %d} %d (%d, %d, %d, %d)\n", x, y, score, upScore, downScore, leftScore, rightScore)
 			if score > best {
 				best = score
 			}
@@ -183,7 +183,7 @@ func solvePart2(in []string) int {
 
 func GetAt(arr []int, x, y, size int) int {
 	if x < 0 || y < 0 || x > size-1 || y > size-1 {
-		return 0
+		return -1
 	}
 	i := (y * size) + x
 	v := arr[i]
