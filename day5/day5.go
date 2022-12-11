@@ -70,8 +70,9 @@ func solvePart1(fname string, stacks []stack.Stack[rune]) string {
 
 func solvePart2(fname string, stacks []stack.Stack[rune]) string {
 	instructions := getInstructions(fname)
+	var tmp stack.Stack[rune]
 	for _, instruction := range instructions {
-		tmp := stack.Stack[rune]{}
+		tmp = stack.Stack[rune]{}
 		for i := 0; i < instruction.quantity; i++ {
 			v, err := stacks[instruction.from].Pop()
 			if err != nil {

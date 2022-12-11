@@ -88,3 +88,10 @@ func FoldN[T any](slice []T, n int) [][]T {
 
 	return ret
 }
+
+func Abs(a, b int) int {
+	if a < b {
+		return b - a
+	}
+	return a - b
+}
