@@ -115,14 +115,12 @@ func (m *coord) moveTowards(other coord) {
 		} else {
 			m.Y--
 		}
-	} else if m.Y == other.Y && utils.Abs(m.X, other.X) == 2 {
+	} else if m.Y == other.Y && !m.touching(other) {
 		if m.X < other.X {
 			m.X++
 		} else {
 			m.X--
 		}
-	} else if m.X == other.X || m.Y == other.Y {
-		return
 	} else if !m.touching(other) {
 		if m.Y < other.Y {
 			m.Y++
