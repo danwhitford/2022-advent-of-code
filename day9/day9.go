@@ -109,7 +109,7 @@ func (m *coord) move(dir direction) {
 func (m *coord) moveTowards(other coord) {
 	if m.X == other.X && m.Y == other.Y {
 		return
-	} else if m.X == other.X && utils.Abs(m.Y, other.Y) == 2 {
+	} else if m.X == other.X && !m.touching(other) {
 		if m.Y < other.Y {
 			m.Y++
 		} else {
