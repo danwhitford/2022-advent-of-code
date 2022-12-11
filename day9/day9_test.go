@@ -31,8 +31,8 @@ func TestSolvePart1(t *testing.T) {
 }
 
 func TestSolvePart2(t *testing.T) {
-	ts := []struct{
-		in string
+	ts := []struct {
+		in   string
 		want int
 	}{
 		{in, 1},
