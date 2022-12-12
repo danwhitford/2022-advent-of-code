@@ -88,11 +88,11 @@ func parseInput(lines []string) []instruction {
 }
 
 type Part2VM struct {
-	X               int
-	Cycle           int
-	Instructions    []instruction
-	IP              int
-	Buf             *instruction
+	X            int
+	Cycle        int
+	Instructions []instruction
+	IP           int
+	Buf          *instruction
 }
 
 func NewPart2Vm(in []instruction) *Part2VM {
@@ -108,7 +108,7 @@ func NewPart2Vm(in []instruction) *Part2VM {
 func (vm *Part2VM) Run() string {
 	var sb strings.Builder
 	for vm.IP < len(vm.Instructions) || vm.Buf != nil {
-		if vm.Cycle > 0 && vm.Cycle % 40 == 0 {
+		if vm.Cycle > 0 && vm.Cycle%40 == 0 {
 			sb.WriteString("\n")
 		}
 		willDraw := vm.Cycle % 40
@@ -116,7 +116,7 @@ func (vm *Part2VM) Run() string {
 			sb.WriteString("#")
 		} else {
 			sb.WriteString(".")
-		}		
+		}
 
 		if vm.Buf != nil {
 			do := *vm.Buf
