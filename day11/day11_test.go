@@ -1,7 +1,6 @@
 package main
 
 import (
-	"math/big"
 	"testing"
 
 	"github.com/danwhitford/2022adventofcode/utils"
@@ -10,32 +9,32 @@ import (
 
 var monkeys = []Monkey{
 	{
-		utils.ToBigInts([]int{79, 98}),
-		func (i *big.Int) *big.Int { return i.Mul(i, big.NewInt(19)) },
+		[]int{79, 98},
+		func (i int) int { return i * 19 },
 		23,
 		2,
 		3,
 		0,
 	},
 	{
-		utils.ToBigInts([]int{54, 65, 75, 74}),
-		func (i *big.Int) *big.Int { return i.Add(i, big.NewInt(6)) },
+		[]int{54, 65, 75, 74},
+		func (i int) int { return i + 6 },
 		19,
 		2,
 		0,
 		0,
 	},
 	{
-		utils.ToBigInts([]int{79, 60, 97}),
-		func (i *big.Int) *big.Int { return i.Mul(i, i) },
+		[]int{79, 60, 97},
+		func (i int) int { return i * i },
 		13,
 		1,
 		3,
 		0,
 	},
 	{
-		utils.ToBigInts([]int{74}),
-		func (i *big.Int) *big.Int { return i.Add(i, big.NewInt(3)) },
+		[]int{74},
+		func (i int) int { return i + 3 },
 		17,
 		0,
 		1,
