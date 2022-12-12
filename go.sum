@@ -2,3 +2,5 @@ github.com/danwhitford/stacko v0.0.0-20221202234322-77d9d9ca6b2f h1:W/Rp1NTAl5TQ
 github.com/danwhitford/stacko v0.0.0-20221202234322-77d9d9ca6b2f/go.mod h1:oVLTjz9G+M4337lAu5/EgkdJujA3HWX26tKOnYFPg68=
 github.com/google/go-cmp v0.5.9 h1:O2Tfq5qg4qc4AmwVlvv0oLiVAGB7enBSJ2x2DqQFi38=
 github.com/google/go-cmp v0.5.9/go.mod h1:17dUlkBOakJ0+DkrSSNjCkIjxS6bF9zb3elmeNGIjoY=
+github.com/jinzhu/copier v0.3.5 h1:GlvfUwHk62RokgqVNvYsku0TATCF7bAHVwEXoBh3iJg=
+github.com/jinzhu/copier v0.3.5/go.mod h1:DfbEm0FYsaqBcKcFuvmOZb218JkPGtvSHsKg8S8hyyg=

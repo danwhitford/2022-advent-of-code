@@ -3,6 +3,7 @@ package utils
 import (
 	"bufio"
 	"log"
+	"math/big"
 	"os"
 	"testing"
 
@@ -94,4 +95,12 @@ func Abs(a, b int) int {
 		return b - a
 	}
 	return a - b
+}
+
+func ToBigInts(a []int) []*big.Int {
+	ret := make([]*big.Int, 0)
+	for _, v := range a {
+		ret = append(ret, big.NewInt(int64(v)))
+	}
+	return ret
 }
