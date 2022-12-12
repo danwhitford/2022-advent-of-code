@@ -90,22 +90,15 @@ func solvePart1(monkeys []Monkey) int {
 			for !monkey.Items.Empty() {
 				item, err := monkey.Items.Dequeue()
 				monkey.InspectionCount++
-				// log.Printf("Monkey %d inspects item %d\n", i, item)
 				if err != nil {
 					panic(err)
 				}
 				item = monkey.Operation(item)
-				// log.Printf("\tItem is changed to %d\n", item)
 				item /= 3
-				// log.Printf("\tWorry level is divided by 3 to %d\n", item)
 
 				if item%monkey.Test == 0 {
-					// log.Printf("\tWorry level is divisible by %d\n", monkey.Test)
-					// log.Printf("\tItem with worry level %d is thrown to monkey %d\n", item, monkey.TrueThrow)
 					monkeys[monkey.TrueThrow].Items.Enqueue(item)
 				} else {
-					// log.Printf("\tWorry level is not divisible by %d\n", monkey.Test)
-					// log.Printf("\tItem with worry level %d is thrown to monkey %d\n", item, monkey.FalseThrow)
 					monkeys[monkey.FalseThrow].Items.Enqueue(item)
 				}
 			}
@@ -113,12 +106,6 @@ func solvePart1(monkeys []Monkey) int {
 		}
 	}
 
-	for i, m := range monkeys {
-		fmt.Println("Monkey", i, "holding", m.Items)
-	}
-	for i, m := range monkeys {
-		fmt.Println("Monkey", i, "inspected items", m.InspectionCount, "times")
-	}
 	business := make([]int, 0)
 	for _, m := range monkeys {
 		business = append(business, m.InspectionCount)
@@ -152,11 +139,6 @@ func solvePart2(monkeys []Monkey) int {
 				}
 			}
 			monkeys[i] = monkey
-		}
-
-		fmt.Println("After round", round)
-		for i, m := range monkeys {
-			fmt.Println("Monkey", i, "inspected items", m.InspectionCount, "times")
 		}
 	}
 
