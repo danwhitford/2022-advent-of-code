@@ -10,7 +10,7 @@ import (
 var monkeys = []Monkey{
 	{
 		[]int{79, 98},
-		func (i int) int { return i * 19 },
+		func(i int) int { return i * 19 },
 		23,
 		2,
 		3,
@@ -18,7 +18,7 @@ var monkeys = []Monkey{
 	},
 	{
 		[]int{54, 65, 75, 74},
-		func (i int) int { return i + 6 },
+		func(i int) int { return i + 6 },
 		19,
 		2,
 		0,
@@ -26,7 +26,7 @@ var monkeys = []Monkey{
 	},
 	{
 		[]int{79, 60, 97},
-		func (i int) int { return i * i },
+		func(i int) int { return i * i },
 		13,
 		1,
 		3,
@@ -34,7 +34,7 @@ var monkeys = []Monkey{
 	},
 	{
 		[]int{74},
-		func (i int) int { return i + 3 },
+		func(i int) int { return i + 3 },
 		17,
 		0,
 		1,

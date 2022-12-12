@@ -5,7 +5,7 @@ import (
 )
 
 func TestQueuu(t *testing.T) {
-	var q Queue[int] = []int{1,2}
+	var q Queue[int] = []int{1, 2}
 	q.Enqueue(3)
 
 	v, err := q.Dequeue()
@@ -23,6 +23,6 @@ func TestQueuu(t *testing.T) {
 		t.Fatal(err)
 	}
 	Assert(t, 3, v, 3)
-	
+
 	Assert(t, true, q.Empty(), "is empty")
 }
