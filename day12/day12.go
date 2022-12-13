@@ -86,7 +86,7 @@ func shortestPath(board Board, startPos, endPos Coord) int {
 		}
 		for _, destination := range board.GetDestinations(n.coord) {
 			if !seen.Contains(destination) {
-				q.Enqueue(QueueNode{destination, n.depth+1})
+				q.Enqueue(QueueNode{destination, n.depth + 1})
 				seen.Add(destination)
 			}
 		}
